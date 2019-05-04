@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.util.StringUtils;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         List<String> requestMapping = whiteListProperties.getRequestMapping();
-        if (StringUtils.isEmpty(requestMapping)) {
+        if (CollectionUtils.isEmpty(requestMapping)) {
             super.configure(http);
             return;
         }
