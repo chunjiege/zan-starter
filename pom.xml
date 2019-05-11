@@ -10,6 +10,7 @@
     <modules>
         <module>jwt</module>
         <module>boot-starter</module>
+        <module>redis</module>
     </modules>
 
     <repositories>
