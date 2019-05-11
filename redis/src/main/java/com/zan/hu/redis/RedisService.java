@@ -1,4 +1,4 @@
-package com.zan.hu.redis.redis;
+package com.zan.hu.redis;
 
 import java.util.Set;
 
@@ -24,9 +24,7 @@ public interface RedisService {
 
     void remove(String... key);
 
-    /**
-     * set 集合
-     */
+    //** set 集合
 
     /**
      * 向变量中批量添加值。

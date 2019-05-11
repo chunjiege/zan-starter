@@ -1,4 +1,4 @@
-package com.zan.hu.redis.redis.entity;
+package com.zan.hu.redis.entity;
 
 import lombok.Data;
 

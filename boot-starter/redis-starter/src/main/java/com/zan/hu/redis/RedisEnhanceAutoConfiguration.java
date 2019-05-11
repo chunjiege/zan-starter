@@ -1,8 +1,5 @@
 package com.zan.hu.redis;
 
-import com.zan.hu.redis.redis.RedisConf;
-import com.zan.hu.redis.redis.RedisService;
-import com.zan.hu.redis.redis.RedisServiceImpl;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,12 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description todo
  **/
 @Configuration
-public class RedisAutoConfiguration {
-
-    @Bean
-    public RedisConf redisConf() {
-        return new RedisConf();
-    }
+public class RedisEnhanceAutoConfiguration {
 
     @Bean
     @ConditionalOnProperty(prefix = "redis.basic.server", value = "enable", havingValue = "true")

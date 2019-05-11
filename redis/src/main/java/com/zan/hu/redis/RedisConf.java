@@ -1,10 +1,10 @@
-package com.zan.hu.redis.redis;
+package com.zan.hu.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
@@ -16,12 +16,13 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Date 2019-05-11 13:45
  * @Description todo
  **/
+@Configuration
 public class RedisConf {
 
     @Bean
-    @ConditionalOnBean(RedisTemplate.class)
+    //@ConditionalOnMissingBean(RedisTemplate.class)
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, Object> template = new RedisTemplate<String, Object>();
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         template.setConnectionFactory(factory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper om = new ObjectMapper();
