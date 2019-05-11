@@ -20,4 +20,9 @@ public class JwtDecodeAutoConfiguration {
         return new FeignConfiguration();
     }
 
+    @Bean
+    public JwtConf jwtConf() {
+        return new JwtConf();
+    }
+
 }

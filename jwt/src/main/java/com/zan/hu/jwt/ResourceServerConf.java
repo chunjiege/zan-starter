@@ -18,11 +18,10 @@ import java.util.List;
  * @Description todo
  **/
 @EnableConfigurationProperties(WhiteListProperties.class)
-public class ResourceServerConf extends ResourceServerConfigurerAdapter {
+public abstract class ResourceServerConf extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private WhiteListProperties whiteListProperties;
-
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -30,13 +29,9 @@ public class ResourceServerConf extends ResourceServerConfigurerAdapter {
                 .resourceId(resourceId());
     }
 
-    public TokenStore tokenStore() {
-        return null;
-    }
+    public abstract TokenStore tokenStore();
 
-    public String resourceId() {
-        return null;
-    }
+    public abstract String resourceId();
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

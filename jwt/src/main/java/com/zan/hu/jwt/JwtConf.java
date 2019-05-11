@@ -1,17 +1,16 @@
 package com.zan.hu.jwt;
 
-import com.zan.hu.jwt.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.util.FileCopyUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @version 1.0
@@ -19,20 +18,10 @@ import java.io.IOException;
  * @Date 2019-03-31 13:27
  * @Description todo
  **/
-@Configuration
-@EnableConfigurationProperties(SecurityProperties.class)
 public class JwtConf {
 
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
-
-
-    private final SecurityProperties securityProperties;
-
-
-    public JwtConf(final SecurityProperties securityProperties) {
-        this.securityProperties = securityProperties;
-    }
 
     @Bean
     @Qualifier("tokenStore")
@@ -52,7 +41,9 @@ public class JwtConf {
 
     private String getPublicKeyAsString() {
         try {
-            return new String(FileCopyUtils.copyToByteArray(securityProperties.getJwt().getPublicKey().getInputStream()));
+            ClassPathResource classPathResource = new ClassPathResource("public.cert");
+            InputStream inputStream = classPathResource.getInputStream();
+            return new String(FileCopyUtils.copyToByteArray(inputStream));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
