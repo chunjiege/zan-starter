@@ -18,4 +18,5 @@ public class RedisEnhanceAutoConfiguration {
     public RedisService redisService() {
         return new RedisServiceImpl();
     }
+
 }

@@ -23,13 +23,14 @@ public abstract class ResourceServerConf extends ResourceServerConfigurerAdapter
     @Autowired
     private WhiteListProperties whiteListProperties;
 
+    @Autowired
+    private TokenStore tokenStore;
+
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.tokenStore(tokenStore())
+        resources.tokenStore(tokenStore)
                 .resourceId(resourceId());
     }
-
-    public abstract TokenStore tokenStore();
 
     public abstract String resourceId();
 

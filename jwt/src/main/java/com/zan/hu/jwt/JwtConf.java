@@ -3,6 +3,7 @@ package com.zan.hu.jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
@@ -18,6 +19,7 @@ import java.io.InputStream;
  * @Date 2019-03-31 13:27
  * @Description todo
  **/
+@Configuration
 public class JwtConf {
 
     @Autowired
@@ -26,6 +28,7 @@ public class JwtConf {
     @Bean
     @Qualifier("tokenStore")
     public TokenStore tokenStore() {
+        System.out.println("tokenStore 注册成功");
         return new JwtTokenStore(jwtAccessTokenConverter);
     }
 

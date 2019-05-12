@@ -11,6 +11,7 @@
         <module>jwt</module>
         <module>boot-starter</module>
         <module>redis</module>
+        <module>response-advice</module>
     </modules>
 
     <repositories>
