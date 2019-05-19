@@ -26,13 +26,4 @@ public class ResponseAdviceConfiguration implements WebMvcConfigurer {
         return new SwaggerInterceptor();
     }
 
-//    @Bean("defAdvice")
-//    public DefResponseBodyAdvice defResponseBodyAdvice() {
-//        return new DefResponseBodyAdvice();
-//    }
-//
-//    @Bean("")
-//    public ExceptionAdvice exceptionAdvice() {
-//        return new ExceptionAdvice();
-//    }
 }

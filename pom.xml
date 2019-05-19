@@ -6,7 +6,7 @@
     <groupId>com.zan.hu</groupId>
     <artifactId>zan-starter</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-RELEASE</version>
     <modules>
         <module>jwt</module>
         <module>boot-starter</module>
@@ -46,7 +46,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.6</version>
         </dependency>
     </dependencies>
 
@@ -54,8 +53,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.zan.hup</groupId>
-                <artifactId>common-bom</artifactId>
-                <version>${project.version}</version>
+                <artifactId>zan-bom</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
