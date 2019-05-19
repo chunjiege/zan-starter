@@ -9,14 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>boot-starter</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>jwt-starter</module>
-        <module>redis-starter</module>
-        <module>response-advice-starter</module>
-        <module>mybatis-starter</module>
-    </modules>
+    <artifactId>mybatis-sql</artifactId>
 
-    <dependencies></dependencies>
+    <dependencies>
+        <dependency>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
 </project>

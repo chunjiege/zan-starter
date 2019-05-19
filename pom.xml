@@ -12,6 +12,7 @@
         <module>boot-starter</module>
         <module>redis</module>
         <module>response-advice</module>
+        <module>mybatis-sql</module>
     </modules>
 
     <repositories>
