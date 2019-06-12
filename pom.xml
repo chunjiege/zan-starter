@@ -54,8 +54,8 @@
         <dependencies>
             <dependency>
                 <groupId>com.zan.hup</groupId>
-                <artifactId>common-bom</artifactId>
-                <version>${project.version}</version>
+                <artifactId>zan-bom</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
