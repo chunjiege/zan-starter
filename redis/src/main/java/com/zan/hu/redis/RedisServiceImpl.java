@@ -57,11 +57,6 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public void setRemove(String key, String value) {
-
-    }
-
-    @Override
     public boolean expire(String key, long time) {
         try {
             if (time > 0) {

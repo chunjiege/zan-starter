@@ -44,7 +44,6 @@ public interface RedisService {
 
     void add(String key, long time, Object... values);
 
-    void setRemove(String key, String value);
 
     //指定缓存失效的时间
     boolean expire(String key, long time);

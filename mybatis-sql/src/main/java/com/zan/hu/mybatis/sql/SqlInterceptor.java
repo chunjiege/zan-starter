@@ -112,7 +112,7 @@ public class SqlInterceptor implements Interceptor {
         log.info("【SQL语句Id】>>>> {}", sqlId);
         log.info("【SQL语句耗时】>>>> {} ms", time);
         log.info("【SQL语句】>>>> {}", sql);
-        log.info("[SQL语句执行完成] /n");
+        log.info("[SQL语句执行完成]");
     }
 
     private static String showSql(Configuration configuration, BoundSql boundSql) {
