@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.zan.hu.common.utils.ObjectMapperUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -28,6 +29,7 @@ import java.util.Map;
  **/
 @ConditionalOnProperty(prefix = "current.thread.data", value = "enable", havingValue = "true")
 @Configuration
+@Slf4j
 public class CommonAutoConfiguration {
 
 
@@ -37,7 +39,7 @@ public class CommonAutoConfiguration {
         registration.setFilter(new CommonFilter());
         registration.addUrlPatterns("/*");
         registration.setName("commonFilter");
-        System.out.println("公用filter注册成功！！！");
+        log.info("公用filter注册成功！！！");
         return registration;
     }
 
@@ -49,7 +51,8 @@ public class CommonAutoConfiguration {
             if (!StringUtils.isEmpty(details)) {
                 String decode = URLDecoder.decode(details, "UTF-8");
                 Map<String, Object> currentThreadData = ObjectMapperUtils.newInstance().readValue(decode, Map.class);
-                CommonThreadLocal.set(currentThreadData);
+                CurrentRelatedInfo instance = CurrentRelatedInfo.getInstance(currentThreadData);
+                CommonThreadLocal.set(instance);
             }
             chain.doFilter(request, response);
         }

@@ -1,7 +1,5 @@
 package com.zan.hu;
 
-import java.util.Map;
-
 /**
  * @version 1.0
  * @Author hupeng
@@ -10,14 +8,14 @@ import java.util.Map;
  **/
 public class CommonThreadLocal {
 
-    private static ThreadLocal<Map<String,Object>> currentTreadDataThreadLocal = new ThreadLocal<>();
+    private static ThreadLocal<CurrentRelatedInfo> currentTreadDataThreadLocal = new ThreadLocal<>();
 
-    public static Map<String,Object> get() {
+    public static CurrentRelatedInfo get() {
         return currentTreadDataThreadLocal.get();
     }
 
-    public static void set(Map<String,Object> currentThreadData) {
-        currentTreadDataThreadLocal.set(currentThreadData);
+    public static void set(CurrentRelatedInfo currentRelatedInfo) {
+        currentTreadDataThreadLocal.set(currentRelatedInfo);
     }
 
     public static void remove() {
