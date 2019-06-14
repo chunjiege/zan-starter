@@ -1,7 +1,10 @@
 package com.zan.hu;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zan.hu.common.utils.ObjectMapperUtils;
 import com.zan.hu.user.model.User;
 import lombok.Data;
+import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
@@ -28,8 +31,19 @@ public class CurrentRelatedInfo {
 
 
     public static CurrentRelatedInfo getInstance(Map<String, Object> currentThreadData) {
-        User user = (User) currentThreadData.get("user");
-        String gudi = currentThreadData.get("guid").toString();
-        return new CurrentRelatedInfo(user, gudi);
+        String guid = currentThreadData.get("guid").toString();
+        if (StringUtils.isEmpty(guid))
+            return null;
+        User user = null;
+        try {
+            Map<String, Object> temp = (Map<String, Object>) currentThreadData.get("user");
+            ObjectMapper objectMapper = ObjectMapperUtils.newInstance();
+            String json = objectMapper.writeValueAsString(temp);
+            user = objectMapper.readValue(json, User.class);
+        } catch (Exception e) {
+
+        }
+
+        return new CurrentRelatedInfo(user, guid);
     }
 }

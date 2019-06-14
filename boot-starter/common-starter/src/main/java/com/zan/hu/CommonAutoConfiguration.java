@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.zan.hu.common.utils.ObjectMapperUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @version 1.0
@@ -27,19 +27,18 @@ import java.util.Map;
  * @Date 2019-06-03 17:44
  * @Description todo
  **/
-@ConditionalOnProperty(prefix = "current.thread.data", value = "enable", havingValue = "true")
 @Configuration
 @Slf4j
 public class CommonAutoConfiguration {
 
 
     @Bean
-    public FilterRegistrationBean testFilterRegistration() {
+    public FilterRegistrationBean filterRegistration() {
         FilterRegistrationBean registration = new FilterRegistrationBean();
         registration.setFilter(new CommonFilter());
         registration.addUrlPatterns("/*");
         registration.setName("commonFilter");
-        log.info("公用filter注册成功！！！");
+        log.info("CommonFilter注册成功！！！");
         return registration;
     }
 
@@ -48,7 +47,8 @@ public class CommonAutoConfiguration {
         public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
             HttpServletRequest httpServletRequest = (HttpServletRequest) request;
             String details = httpServletRequest.getHeader("details");
-            if (!StringUtils.isEmpty(details)) {
+            String from = httpServletRequest.getHeader("from");
+            if (StringUtils.isEmpty(from) && !StringUtils.isEmpty(details)) {
                 String decode = URLDecoder.decode(details, "UTF-8");
                 Map<String, Object> currentThreadData = ObjectMapperUtils.newInstance().readValue(decode, Map.class);
                 CurrentRelatedInfo instance = CurrentRelatedInfo.getInstance(currentThreadData);
@@ -59,6 +59,7 @@ public class CommonAutoConfiguration {
 
         @Override
         public void destroy() {
+            log.info("当前线程：" + Thread.currentThread().getName() + "正在清除ThreadLocal中的数据");
             CommonThreadLocal.remove();
         }
     }
