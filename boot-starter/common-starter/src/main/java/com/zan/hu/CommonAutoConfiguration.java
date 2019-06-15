@@ -3,8 +3,8 @@ package com.zan.hu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import com.zan.hu.common.utils.ObjectMapperUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * @version 1.0
@@ -30,6 +29,9 @@ import java.util.Objects;
 @Configuration
 @Slf4j
 public class CommonAutoConfiguration {
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
 
     @Bean
@@ -50,8 +52,8 @@ public class CommonAutoConfiguration {
             String from = httpServletRequest.getHeader("from");
             if (StringUtils.isEmpty(from) && !StringUtils.isEmpty(details)) {
                 String decode = URLDecoder.decode(details, "UTF-8");
-                Map<String, Object> currentThreadData = ObjectMapperUtils.newInstance().readValue(decode, Map.class);
-                CurrentRelatedInfo instance = CurrentRelatedInfo.getInstance(currentThreadData);
+                Map<String, Object> currentThreadData = objectMapper.readValue(decode, Map.class);
+                CurrentRelatedInfo instance = CurrentRelatedInfo.getInstance(currentThreadData, objectMapper);
                 CommonThreadLocal.set(instance);
             }
             chain.doFilter(request, response);
