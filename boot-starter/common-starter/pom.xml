@@ -5,21 +5,24 @@
     <parent>
         <artifactId>boot-starter</artifactId>
         <groupId>com.zan.hu</groupId>
-        <version>1.0-RELEASE</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jwt-starter</artifactId>
+    <artifactId>common-starter</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>com.zan.hu</groupId>
-            <artifactId>jwt</artifactId>
-            <version>${parent.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.security.oauth.boot</groupId>
-            <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zan.hu</groupId>
+            <artifactId>user-model</artifactId>
         </dependency>
     </dependencies>
 </project>

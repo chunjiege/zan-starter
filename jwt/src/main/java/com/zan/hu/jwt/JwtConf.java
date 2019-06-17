@@ -1,5 +1,6 @@
 package com.zan.hu.jwt;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ import java.io.InputStream;
  * @Description todo
  **/
 @Configuration
+@Slf4j
 public class JwtConf {
 
     @Autowired
@@ -28,7 +30,7 @@ public class JwtConf {
     @Bean
     @Qualifier("tokenStore")
     public TokenStore tokenStore() {
-        System.out.println("tokenStore 注册成功");
+        log.info("tokenStore 注册成功");
         return new JwtTokenStore(jwtAccessTokenConverter);
     }
 

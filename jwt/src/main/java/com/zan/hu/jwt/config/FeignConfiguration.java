@@ -2,6 +2,7 @@ package com.zan.hu.jwt.config;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +14,7 @@ import org.springframework.security.oauth2.provider.authentication.OAuth2Authent
  * @Date 2019-04-09 10:11
  * @Description 转发请求头、在header头增加一些鉴权信息
  **/
+@Configuration
 public class FeignConfiguration implements RequestInterceptor {
 
     private final String AUTHORIZATION_HEADER = "Authorization";
