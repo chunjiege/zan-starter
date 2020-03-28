@@ -14,7 +14,6 @@
     <modules>
         <module>jwt-starter</module>
         <module>redis-starter</module>
-        <module>response-advice-starter</module>
         <module>mybatis-starter</module>
         <module>common-starter</module>
     </modules>
