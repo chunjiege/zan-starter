@@ -3,10 +3,14 @@ package com.zan.hu;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import feign.form.spring.SpringFormEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.util.StringUtils;
 
@@ -79,5 +83,13 @@ public class CommonAutoConfiguration {
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         objectMapper.registerModule(new JavaTimeModule());
         return objectMapper;
+    }
+
+    @Bean
+    @ConditionalOnClass(SpringFormEncoder.class)
+    @ConditionalOnProperty(prefix = "zan.feign.multipart", name = "enabled", matchIfMissing = true)
+    public FeignMultipartSupportConfig feignMultipartSupportConfig() {
+        log.info("FeignMultipartSupportConfig register successfully");
+        return new FeignMultipartSupportConfig();
     }
 }
